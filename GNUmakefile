@@ -1,5 +1,5 @@
 # can't use -fno-rtti yet because it causes problems with exception handling in GCC 2.95.2
-CXXFLAGS = -g
+CXXFLAGS = -g -fpermissive
 # Uncomment the following two lines to do a release build.
 # Note that you must define NDEBUG for your own application if you define it for Crypto++.
 # Make sure you run the validation tests and test your own program thoroughly
@@ -8,7 +8,7 @@ CXXFLAGS = -g
 # CXXFLAGS = -O3 -DNDEBUG -ffunction-sections -fdata-sections
 # LDFLAGS += -Wl,--gc-sections
 ARFLAGS = -cr	# ar needs the dash on OpenBSD
-RANLIB = ranlib
+RANLIB = $(PREFIX)ranlib
 CP = cp
 MKDIR = mkdir
 EGREP = egrep
@@ -17,13 +17,16 @@ ISX86 = $(shell uname -m | $(EGREP) -c "i.86|x86|i86")
 ISMINGW = $(shell uname | $(EGREP) -c "MINGW32")
 
 # Default prefix for make install
-ifeq ($(PREFIX),)
-PREFIX = /usr
+ifeq ($(INSTALL_PREFIX),)
+INSTALL_PREFIX = /usr
 endif
 
 ifeq ($(CXX),gcc)	# for some reason CXX is gcc on cygwin 1.1.4
 CXX = g++
 endif
+
+CC=$(PREFIX)gcc
+CXX=$(PREFIX)g++
 
 ifeq ($(ISX86),1)
 
@@ -95,10 +98,10 @@ clean:
 	$(RM) cryptest.exe libcryptopp.a $(LIBOBJS) $(TESTOBJS) cryptopp.dll libcryptopp.dll.a libcryptopp.import.a cryptest.import.exe dlltest.exe $(DLLOBJS) $(LIBIMPORTOBJS) $(TESTIMPORTOBJS) $(DLLTESTOBJS)
 
 install:
-	$(MKDIR) -p $(PREFIX)/include/cryptopp $(PREFIX)/lib $(PREFIX)/bin
-	$(CP) *.h $(PREFIX)/include/cryptopp
-	$(CP) *.a $(PREFIX)/lib
-	$(CP) *.exe $(PREFIX)/bin
+	$(MKDIR) -p $(INSTALL_PREFIX)/include/cryptopp $(INSTALL_PREFIX)/lib $(INSTALL_PREFIX)/bin
+	$(CP) *.h $(INSTALL_PREFIX)/include/cryptopp
+	$(CP) *.a $(INSTALL_PREFIX)/lib
+	$(CP) *.exe $(INSTALL_PREFIX)/bin
 
 libcryptopp.a: $(LIBOBJS)
 	$(AR) $(ARFLAGS) $@ $(LIBOBJS)

@@ -12,6 +12,8 @@
 #include <mem.h>
 #endif
 
+#include <memory.h>
+
 NAMESPACE_BEGIN(CryptoPP)
 
 // ************** compile-time assertion ***************
