@@ -1,3 +1,5 @@
+*** PSForever: see BUILDING.md ***
+
 Crypto++: a C++ Class Library of Cryptographic Schemes
 Version 5.4 12/22/2006
 
