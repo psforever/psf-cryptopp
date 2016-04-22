@@ -1,12 +1,17 @@
 # can't use -fno-rtti yet because it causes problems with exception handling in GCC 2.95.2
-CXXFLAGS = -g -fpermissive
 # Uncomment the following two lines to do a release build.
 # Note that you must define NDEBUG for your own application if you define it for Crypto++.
 # Make sure you run the validation tests and test your own program thoroughly
 # after turning on -O3. The GCC optimizer may have bugs that cause it to generate incorrect code.
 # Try removing -fdata-sections if you get "undefined external reference" errors.
-# CXXFLAGS = -O3 -DNDEBUG -ffunction-sections -fdata-sections
-# LDFLAGS += -Wl,--gc-sections
+ifdef DEBUG
+CXXFLAGS = -g -fpermissive
+else
+CXXFLAGS = -O2 -DNDEBUG -ffunction-sections -fdata-sections -fpermissive
+LDFLAGS += -Wl,--gc-sections
+endif
+
+##################
 ARFLAGS = -cr	# ar needs the dash on OpenBSD
 RANLIB = $(PREFIX)ranlib
 CP = cp
@@ -92,7 +97,7 @@ LIBIMPORTOBJS = $(LIBOBJS:.o=.import.o)
 TESTIMPORTOBJS = $(TESTOBJS:.o=.import.o)
 DLLTESTOBJS = dlltest.dllonly.o
 
-all: cryptest.exe
+all: libcryptopp.a
 
 clean:
 	$(RM) cryptest.exe libcryptopp.a $(LIBOBJS) $(TESTOBJS) cryptopp.dll libcryptopp.dll.a libcryptopp.import.a cryptest.import.exe dlltest.exe $(DLLOBJS) $(LIBIMPORTOBJS) $(TESTIMPORTOBJS) $(DLLTESTOBJS)

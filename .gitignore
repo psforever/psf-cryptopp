@@ -2,3 +2,4 @@
 libcryptopp.a
 a.out
 *.swp
+adhoc.cpp
