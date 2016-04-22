@@ -1,0 +1,4 @@
+*.o
+libcryptopp.a
+a.out
+*.swp
