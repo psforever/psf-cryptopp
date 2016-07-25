@@ -11,6 +11,13 @@ CXXFLAGS := $(CXXFLAGS) -O2 -DNDEBUG -ffunction-sections -fdata-sections -fpermi
 LDFLAGS := $(LDFLAGS) -Wl,--gc-sections
 endif
 
+# Compiler quirks
+ifeq "$(OS)" "mingw32"
+else ifeq "$(OS)" "cygwin"
+else
+  CXXFLAGS := $(CXXFLAGS) -fPIC
+endif
+
 ##################
 ARFLAGS = -cr	# ar needs the dash on OpenBSD
 RANLIB = $(PREFIX)ranlib
