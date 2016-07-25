@@ -5,10 +5,10 @@
 # after turning on -O3. The GCC optimizer may have bugs that cause it to generate incorrect code.
 # Try removing -fdata-sections if you get "undefined external reference" errors.
 ifdef DEBUG
-CXXFLAGS = -g -fpermissive
+CXXFLAGS = $(CXXFLAGS) -g -fpermissive
 else
-CXXFLAGS = -O2 -DNDEBUG -ffunction-sections -fdata-sections -fpermissive
-LDFLAGS += -Wl,--gc-sections
+CXXFLAGS := $(CXXFLAGS) -O2 -DNDEBUG -ffunction-sections -fdata-sections -fpermissive
+LDFLAGS := $(LDFLAGS) -Wl,--gc-sections
 endif
 
 ##################
