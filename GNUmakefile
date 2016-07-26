@@ -5,9 +5,9 @@
 # after turning on -O3. The GCC optimizer may have bugs that cause it to generate incorrect code.
 # Try removing -fdata-sections if you get "undefined external reference" errors.
 ifdef DEBUG
-CXXFLAGS = $(CXXFLAGS) -g -fpermissive
+CXXFLAGS = $(CXXFLAGS) -g -fpermissive -std=c++03
 else
-CXXFLAGS := $(CXXFLAGS) -O2 -DNDEBUG -ffunction-sections -fdata-sections -fpermissive
+CXXFLAGS := $(CXXFLAGS) -O2 -DNDEBUG -ffunction-sections -fdata-sections -fpermissive -std=c++03
 LDFLAGS := $(LDFLAGS) -Wl,--gc-sections
 endif
 
