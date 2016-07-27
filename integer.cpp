@@ -18,7 +18,7 @@
 #include <iostream>
 
 #ifdef _M_X64
-#include <Intrin.h>
+#include <intrin.h>
 #endif
 
 #ifdef SSE2_INTRINSICS_AVAILABLE
