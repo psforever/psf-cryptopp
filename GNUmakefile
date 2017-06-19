@@ -18,9 +18,14 @@ else
   CXXFLAGS := $(CXXFLAGS) -fPIC
 endif
 
+# Allow overriding prefix for ranlib separately
+ifndef PREFIX_RANLIB_USE
+  PREFIX_RANLIB := $(PREFIX)
+endif
+
 ##################
 ARFLAGS = -cr	# ar needs the dash on OpenBSD
-RANLIB = $(PREFIX)ranlib
+RANLIB = $(PREFIX_RANLIB)ranlib
 CP = cp
 MKDIR = mkdir
 EGREP = egrep
